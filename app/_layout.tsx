@@ -1,21 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { Slot } from 'expo-router';
+import { StyleSheet, Text, View } from "react-native";
+import { Slot, Stack } from "expo-router";
 
 const RootLayout = () => {
   return (
-    <View style={styles.container}>
-      <Text>RootLayout</Text>
-    </View>
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+    </Stack>
   )
-}
+};
 
-export default RootLayout
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
+export default RootLayout;
