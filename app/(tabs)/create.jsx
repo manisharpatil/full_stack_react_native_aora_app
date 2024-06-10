@@ -11,4 +11,4 @@ const Create = () => {
 
 export default Create
 
-const styles = StyleSheet.Create({})
+// const styles = StyleSheet.Create({})
