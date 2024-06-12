@@ -1,31 +1,44 @@
-import { StyleSheet, View, Text, Image } from "react-native";
-import React from "react";
-import { Tabs, Redirect } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
+import { Image, Text, View } from "react-native";
 
 import { icons } from "../../constants";
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className="item-center justify-center gap-2">
-      <Image 
-      source={icon} 
-      resizeMode="contain"
-      tintColor={color}
-      className="w-6 h-6" />
-      <Text className={`${focused ? 'font-psemibold' : 'font-pregular'} text-xs`}>
+    <View className="flex items-center justify-center gap-2">
+      <Image
+        source={icon}
+        resizeMode="contain"
+        tintColor={color}
+        className="w-6 h-6"
+      />
+      <Text
+        className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
+        style={{ color: color }}
+      >
         {name}
       </Text>
     </View>
   );
 };
 
-const TabsLayout = () => {
+const TabLayout = () => {
+
   return (
     <>
       <Tabs
         screenOptions={{
-          tabBarShowLabel: false
-          }}>
+          tabBarActiveTintColor: "#FFA001",
+          tabBarInactiveTintColor: "#CDCDE0",
+          tabBarShowLabel: false,
+          tabBarStyle: {
+            backgroundColor: "#161622",
+            borderTopWidth: 1,
+            borderTopColor: "#232533",
+            height: 84,
+          },
+        }}
+      >
         <Tabs.Screen
           name="home"
           options={{
@@ -42,7 +55,7 @@ const TabsLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="Bookmark"
+          name="bookmark"
           options={{
             title: "Bookmark",
             headerShown: false,
@@ -57,7 +70,7 @@ const TabsLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="Create"
+          name="create"
           options={{
             title: "Create",
             headerShown: false,
@@ -72,7 +85,7 @@ const TabsLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="Profile"
+          name="profile"
           options={{
             title: "Profile",
             headerShown: false,
@@ -91,6 +104,4 @@ const TabsLayout = () => {
   );
 };
 
-export default TabsLayout;
-
-const styles = StyleSheet.create({});
+export default TabLayout;
