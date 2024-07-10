@@ -6,6 +6,7 @@ import { images } from "../../constants";
 
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
+import { signIn } from "../../lib/appwrite";
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -13,8 +14,23 @@ const SignIn = () => {
     password: "",
   });
   const [isSubmitting, setisSubmitting] = useState(false);
+  const submit = async () => {
+    if (form.username === "" || form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill in all fields");
+    }
 
-  const submit = () => {};
+    setIsSubmitting(true);
+    try {
+      await signIn(form.email, form.password);
+      
+
+      router.replace("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
