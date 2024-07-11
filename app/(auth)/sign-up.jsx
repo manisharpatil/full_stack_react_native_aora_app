@@ -1,7 +1,7 @@
-import { ScrollView, Image, View, Text } from "react-native";
+import { ScrollView, Image, View, Text, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { images } from "../../constants";
 
 import FormField from "../../components/FormField";
@@ -29,7 +29,7 @@ const SignUp = () => {
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
-      setSubmitting(false);
+      setIsSubmitting(false);
     }
   };
 

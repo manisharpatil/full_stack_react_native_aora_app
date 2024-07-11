@@ -1,7 +1,7 @@
-import { ScrollView, Image, View, Text } from "react-native";
+import { ScrollView, Image, View, Text, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { images } from "../../constants";
 
 import FormField from "../../components/FormField";
@@ -13,9 +13,9 @@ const SignIn = () => {
     email: "",
     password: "",
   });
-  const [isSubmitting, setisSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const submit = async () => {
-    if (form.username === "" || form.email === "" || form.password === "") {
+    if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
     }
 
@@ -28,7 +28,7 @@ const SignIn = () => {
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
-      setSubmitting(false);
+      setIsSubmitting(false);
     }
   };
 
