@@ -1,15 +1,29 @@
-import { FlatList, StyleSheet } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { useState } from "react";
+import { FlatList, StyleSheet } from 'react-native';
+import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { images } from "../../constants";
+import SearchInput from '../../components/SearchInput';
+import Trending from '../../components/Trending';
+import EmptyState from '../../components/EmptyState';
+
 
 const Home = () => {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
+
   return (
-    <SafeAreaView>
+    <SafeAreaView className="bg-primary h-full">
       <FlatList
-      data={[{ id: 1 }]}
+      data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
       keyExtractor={(item) => item.$id}
       renderItem={( item ) => {
-        <Text className="text-3xl">{item.id}</Text>
+        <Text className="text-3xl text-white">{item.id}</Text>
       }}
       ListHeaderComponent={() => (
         <View className="flex my-6 px-4 space-y-6">
@@ -39,10 +53,19 @@ const Home = () => {
               Latest Videos
             </Text>
 
-            <Trending posts={latestPosts ?? []} />
+            <Trending posts={[{id: 1}, {id: 2}, {id: 3}] ?? []} />
           </View>
         </View>
-      )} />
+      )}
+      ListEmptyComponent={() => (
+        <EmptyState
+          title="No Videos Found"
+          subtitle="No videos created yet"
+        />
+      )}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      } />
     </SafeAreaView>
   )
 }
